@@ -1,6 +1,22 @@
 # Introduction {#intro}
 
-You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \@ref(intro). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \@ref(methods).
+```{r inline, include = FALSE}
+local({
+  hook_old <- knitr::knit_hooks$get("inline")  # save the old hook
+  knitr::knit_hooks$set(inline = function(x, options) {
+    browser()
+    if (is.character(x) & knitr::is_html_output()) {
+      highr::hi_html(x)
+    } else {
+      hook_old(x, options)
+    }
+  })
+})
+```
+
+Here is some in-line code: `r 'lm(y ~ x, data = dat)'`.
+
+You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \@ref(intro). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \@ref(methods). 
 
 Figures and tables with captions will be placed in `figure` and `table` environments, respectively.
 
